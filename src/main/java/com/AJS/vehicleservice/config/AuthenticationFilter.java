@@ -5,9 +5,9 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
@@ -15,10 +15,10 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 
 @Component
 public class AuthenticationFilter extends OncePerRequestFilter {
-
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -37,16 +37,23 @@ public class AuthenticationFilter extends OncePerRequestFilter {
 
         if (username != null) {
             if (JwtUtil.validateToken(jwtToken, username)) {
-                // Set authentication context
+                // Extract role and set authorities
+                String role = JwtUtil.extractRole(jwtToken);
+                List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(role));
+
                 UsernamePasswordAuthenticationToken authenticationToken =
                         new UsernamePasswordAuthenticationToken(
                                 username, // Username (principal)
                                 null,     // Password (credentials, null in JWT context)
-                                Collections.emptyList() // Authorities
+                                authorities // Authorities (roles)
                         );
                 authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
                 // Set the authentication in SecurityContext
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+            } else {
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid or expired token");
+                return;
             }
         }
         filterChain.doFilter(request, response);

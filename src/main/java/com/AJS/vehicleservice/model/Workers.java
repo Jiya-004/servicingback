@@ -3,15 +3,10 @@ package com.AJS.vehicleservice.model;
 import jakarta.persistence.*;
 
 @Entity
-public class Mechanics {
+public class Workers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @OneToOne
-    @JoinColumn(name="user_id",nullable = false)
-    private User user;
-
     @Column(nullable = false)
     private String name;
 
@@ -21,10 +16,11 @@ public class Mechanics {
     @Column(nullable = false)
     private String location;
 
-    private Double rating; // Average rating
-
     @Enumerated(EnumType.STRING)
     private Availability availability;
+
+    @Column(name = "contact_info")
+    private String contactInfo;
 
     public enum Availability {
         AVAILABLE,
@@ -35,13 +31,7 @@ public class Mechanics {
         return id;
     }
 
-    public User getUser() {
-        return user;
-    }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
     public void setId(Long id) {
         this.id = id;
     }
@@ -70,14 +60,6 @@ public class Mechanics {
         this.location = location;
     }
 
-    public Double getRating() {
-        return rating;
-    }
-
-    public void setRating(Double rating) {
-        this.rating = rating;
-    }
-
     public Availability getAvailability() {
         return availability;
     }
@@ -85,5 +67,13 @@ public class Mechanics {
     public void setAvailability(Availability availability) {
         this.availability = availability;
     }
+    public String getContactInfo() {
+        return contactInfo;
+    }
+
+    public void setContactInfo(String contactInfo) {
+        this.contactInfo = contactInfo;
+    }
+
 }
 

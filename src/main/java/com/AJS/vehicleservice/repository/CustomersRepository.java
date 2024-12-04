@@ -1,16 +1,16 @@
 package com.AJS.vehicleservice.repository;
 
-import com.AJS.vehicleservice.model.User;
+import com.AJS.vehicleservice.model.Customers;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface CustomersRepository extends JpaRepository<Customers, Long> {
     // Find a user by email (useful for login)
-    User findByEmail(String email);
+    Customers findByEmail(String email);
 
     // Check if a user exists by email
     boolean existsByEmail(String email);
 
-    User findByName(String name);
+    Customers findByName(String name);
 }

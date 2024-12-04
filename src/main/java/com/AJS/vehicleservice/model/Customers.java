@@ -3,19 +3,24 @@ package com.AJS.vehicleservice.model;
 import jakarta.persistence.*;
 
 @Entity
-public class User {
+public class Customers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "C_id")
     private Long id;
 
+    @Column(name = "C_name")
     private String name;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false,name = "C_email")
     private String email;
 
-    private String password;
+    @Column(name = "C_address")
+    private String address;
 
-    private String role; // e.g., "customer" or "admin"
+@Column(name = "Registered Date")
+    private String date;
+
 
     // Getters and Setters
     public Long getId() {
@@ -42,22 +47,20 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getAddress(){
+        return address;
+    }
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
-    public String getRole() {
-        return role;
+    public String getDate(){
+        return date;
     }
-
-    public void setRole(String role) {
-        this.role = role;
+    public void setDate(String date) {
+        this.date =date;
     }
-
 
 }
 

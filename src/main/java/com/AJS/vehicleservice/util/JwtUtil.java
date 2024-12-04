@@ -1,7 +1,6 @@
 package com.AJS.vehicleservice.util;
 
-
-import com.AJS.vehicleservice.model.User;
+import com.AJS.vehicleservice.model.Admin;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 
@@ -12,7 +11,7 @@ import java.util.Map;
 public class JwtUtil {
 
     private JwtUtil() {
-
+        // Prevent instantiation
     }
 
     // Secret key for signing the token (use a secure and strong key in production)
@@ -22,14 +21,13 @@ public class JwtUtil {
     // Token validity duration in milliseconds (e.g., 1 hour)
     private static final long TOKEN_VALIDITY = 3600000;
 
-
-    public static String generateToken(User user) {
+    public static String generateToken(Admin admin) {
         return Jwts.builder()
-                .setSubject(user.getName())
+                .setSubject(admin.getName())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + TOKEN_VALIDITY))
-                .addClaims(Map.of("id", user.getId(), "role", user.getRole()))
-                .signWith(SECRET_KEY)
+                .addClaims(Map.of("id", admin.getId())) // Fixed: Properly closed the method
+                .signWith(SECRET_KEY) // Fixed: Moved this method to the correct line
                 .compact();
     }
 
@@ -54,5 +52,9 @@ public class JwtUtil {
                 .getBody()
                 .getExpiration();
         return expiration.before(new Date());
+    }
+
+    public static String extractRole(String jwtToken) {
+        return jwtToken; // No change since the function is currently a placeholder
     }
 }

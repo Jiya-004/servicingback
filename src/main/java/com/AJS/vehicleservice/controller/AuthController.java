@@ -22,4 +22,5 @@ public class AuthController {
          String isSuccess = authService.login(loginDto.name(), loginDto.password());
          return Map.of("Token",isSuccess);
     }
+
 }
