@@ -19,8 +19,8 @@ public class AuthController {
 
     @PostMapping("/login")
     public Map<String , String> login(@RequestBody LoginDto loginDto){
-         String isSuccess = authService.login(loginDto.name(), loginDto.password());
-         return Map.of("Token",isSuccess);
+        String isSuccess = authService.login(loginDto.name(), loginDto.password());
+        return Map.of("Token",isSuccess);
     }
 
 }

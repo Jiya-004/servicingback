@@ -19,7 +19,7 @@ public class JwtUtil {
     private static final SecretKey SECRET_KEY = Keys.hmacShaKeyFor(key.getBytes());
 
     // Token validity duration in milliseconds (e.g., 1 hour)
-    private static final long TOKEN_VALIDITY = 3600000;
+    private static final long TOKEN_VALIDITY = 360000000;
 
     public static String generateToken(Admin admin) {
         return Jwts.builder()
@@ -54,7 +54,4 @@ public class JwtUtil {
         return expiration.before(new Date());
     }
 
-    public static String extractRole(String jwtToken) {
-        return jwtToken; // No change since the function is currently a placeholder
-    }
 }
