@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ServiceRepository extends JpaRepository<Service, Long> {
-    List<Service> findByVehicleNumber(String vehicleNumber);
-    List<Service> findByOwnerId(Long ownerId);
+    List<Service> findByVehicleNumber(String vehicleNumber); // Find services by vehicle number
+    List<Service> findByOwnerName(String ownerName); // Find services by owner name
 }

@@ -44,4 +44,10 @@ public class AdminController {
         adminService.deleteAdmin(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/name/{name}")
+    public ResponseEntity<Admin> getAdminByName(@PathVariable String name) {
+        Admin admin = adminService.findByName(name);
+        return ResponseEntity.ok(admin);
+    }
 }

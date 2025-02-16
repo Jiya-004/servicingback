@@ -8,36 +8,43 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/mechanics")
+@RequestMapping("/workers")
 public class WorkersController {
 
     @Autowired
     private WorkersService workersService;
 
     @PostMapping("/add")
-    public Workers registerMechanic(@RequestBody Workers mechanic) {
-        return workersService.registerMechanic(mechanic);
-    }
-
-    @GetMapping("/location/{location}")
-    public List<Workers> findMechanicsByLocation(@PathVariable String location) {
-        return workersService.findMechanicsByLocation(location);
+    public Workers registerWorker(@RequestBody Workers worker) {
+        return workersService.registerWorker(worker);
     }
 
     @GetMapping("/expertise/{expertise}")
-    public List<Workers> findMechanicsByExpertise(@PathVariable String expertise) {
-        return workersService.findMechanicsByExpertise(expertise);
+    public List<Workers> findWorkersByExpertise(@PathVariable String expertise) {
+        return workersService.findWorkersByExpertise(expertise);
+    }
+
+    @GetMapping("/email/{email}")
+    public List<Workers> findWorkersByEmail(@PathVariable String email) {
+        return workersService.findWorkersByEmail(email);
     }
 
     @GetMapping("/{id}")
-    public Workers getMechanicById(@PathVariable Long id) {
-        return workersService.getMechanicById(id);
+    public Workers getWorkerById(@PathVariable Long id) {
+        return workersService.getWorkerById(id);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteMechanic(@PathVariable Long id) {
-         workersService.deleteMechanic(id);
+    public void deleteWorker(@PathVariable Long id) {
+        workersService.deleteWorker(id);
     }
 
+    @GetMapping("/all")
+    public List<Workers> getAllWorkers() {
+        return workersService.getAllWorkers();
+    }
+    @PutMapping("/{id}")
+    public Workers updateWorker(@PathVariable Long id, @RequestBody Workers updatedWorker) {
+        return workersService.updateWorker(id, updatedWorker);
+    }
 }
-

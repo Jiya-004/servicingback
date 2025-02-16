@@ -7,41 +7,72 @@ public class Workers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(nullable = false)
-    private String name;
+    private String firstName;
+
+    @Column(nullable = false)
+    private String lastName;
+
+    @Column(nullable = false)
+    private String address;
+
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(nullable = false)
+    private String contactInfo;
 
     @Column(nullable = false)
     private String expertise; // e.g., mechanic, electrician
 
-    @Column(nullable = false)
-    private String location;
-
-    @Enumerated(EnumType.STRING)
-    private Availability availability;
-
-    @Column(name = "contact_info")
-    private String contactInfo;
-
-    public enum Availability {
-        AVAILABLE,
-        BUSY
-    }
-//methods
+    // Getters and Setters
     public Long getId() {
         return id;
     }
-
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getContactInfo() {
+        return contactInfo;
+    }
+
+    public void setContactInfo(String contactInfo) {
+        this.contactInfo = contactInfo;
     }
 
     public String getExpertise() {
@@ -51,29 +82,4 @@ public class Workers {
     public void setExpertise(String expertise) {
         this.expertise = expertise;
     }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public Availability getAvailability() {
-        return availability;
-    }
-
-    public void setAvailability(Availability availability) {
-        this.availability = availability;
-    }
-    public String getContactInfo() {
-        return contactInfo;
-    }
-
-    public void setContactInfo(String contactInfo) {
-        this.contactInfo = contactInfo;
-    }
-
 }
-

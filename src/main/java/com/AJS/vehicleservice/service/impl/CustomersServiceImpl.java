@@ -6,6 +6,7 @@ import com.AJS.vehicleservice.service.CustomersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomersServiceImpl implements CustomersService {
@@ -39,8 +40,24 @@ public class CustomersServiceImpl implements CustomersService {
     }
 
     @Override
-    public Customers findByName(String name) {
-        return customersRepository.findByName(name);
+    public Customers findByUsername(String username) {
+        return customersRepository.findByUsername(username);
+    }
+
+    @Override
+    public Customers updateUser(Long id, Customers updatedCustomer) {
+        Optional<Customers> existingCustomer = customersRepository.findById(id);
+        if (existingCustomer.isPresent()) {
+            Customers customer = existingCustomer.get();
+            customer.setFirstname(updatedCustomer.getFirstname());
+            customer.setLastname(updatedCustomer.getLastname());
+            customer.setAddress(updatedCustomer.getAddress());
+            customer.setPhoneNumber(updatedCustomer.getPhoneNumber());
+            customer.setEmail(updatedCustomer.getEmail());
+            customer.setUsername(updatedCustomer.getUsername());
+            return customersRepository.save(customer);
+        }
+        return null; // Return null if the user is not found
     }
 
 }

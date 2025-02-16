@@ -1,6 +1,8 @@
 package com.AJS.vehicleservice.service;
 
 import com.AJS.vehicleservice.model.Customers;
+import com.AJS.vehicleservice.model.Service;
+
 import java.util.List;
 
 public interface CustomersService {
@@ -9,5 +11,8 @@ public interface CustomersService {
     Customers findUserByEmail(String email);
     List<Customers> getAllUsers();
     void deleteUser(Long userId);
-    Customers findByName(String name);
+    Customers findByUsername(String username); // Added new method
+
+
+    Customers updateUser(Long id, Customers updatedCustomer);
 }

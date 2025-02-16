@@ -5,7 +5,6 @@ import com.AJS.vehicleservice.repository.ServiceRepository;
 import com.AJS.vehicleservice.service.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-
 import java.util.List;
 
 @org.springframework.stereotype.Service
@@ -31,8 +30,8 @@ class ServiceServiceImpl implements ServiceService {
     }
 
     @Override
-    public List<Service> getServicesByOwnerId(Long ownerId) {
-        return serviceRepository.findByOwnerId(ownerId);
+    public List<Service> getServicesByOwnerName(String ownerName) {
+        return serviceRepository.findByOwnerName(ownerName);
     }
 
     @Override
@@ -44,11 +43,9 @@ class ServiceServiceImpl implements ServiceService {
     public Service updateService(Long serviceId, Service service) {
         Service existingService = getServiceById(serviceId);
         existingService.setVehicleNumber(service.getVehicleNumber());
-        existingService.setModel(service.getModel());
-        existingService.setModelNumber(service.getModelNumber());
-        existingService.setOwnerId(service.getOwnerId());
         existingService.setOwnerName(service.getOwnerName());
         existingService.setServiceType(service.getServiceType());
+        existingService.setServiceCost(service.getServiceCost());
         return serviceRepository.save(existingService);
     }
 
@@ -58,4 +55,3 @@ class ServiceServiceImpl implements ServiceService {
         serviceRepository.delete(service);
     }
 }
-

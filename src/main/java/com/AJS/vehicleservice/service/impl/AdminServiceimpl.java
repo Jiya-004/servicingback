@@ -33,15 +33,21 @@ class AdminServiceImpl implements AdminService {
 
     @Override
     public Admin updateAdmin(Long id, Admin updatedAdmin) {
-        Admin admin = getAdminById(id); // Check if admin exists
+        Admin admin = getAdminById(id);
+        admin.setFirstName(updatedAdmin.getFirstName());
+        admin.setLastName(updatedAdmin.getLastName());
+        admin.setEmail(updatedAdmin.getEmail());
+        admin.setPhoneNumber(updatedAdmin.getPhoneNumber());
+        admin.setAddress(updatedAdmin.getAddress());
         admin.setName(updatedAdmin.getName());
         admin.setPassword(updatedAdmin.getPassword());
+        admin.setRole(updatedAdmin.getRole());
         return adminRepository.save(admin);
     }
 
     @Override
     public void deleteAdmin(Long id) {
-        Admin admin = getAdminById(id); // Check if admin exists
+        Admin admin = getAdminById(id);
         adminRepository.delete(admin);
     }
 

@@ -7,9 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface WorkersRepository extends JpaRepository<Workers,Long> {
-
-    List<Workers> findByLocation(String location);
-
+public interface WorkersRepository extends JpaRepository<Workers, Long> {
     List<Workers> findByExpertise(String expertise);
+    List<Workers> findByEmail(String email);
 }

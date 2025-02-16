@@ -14,20 +14,14 @@ public class Service {
     @Column(name = "vehicle_number", nullable = false)
     private String vehicleNumber;
 
-    @Column(name = "model", nullable = false)
-    private String model;
-
-    @Column(name = "model_number", nullable = false)
-    private String modelNumber;
-
-    @Column(name = "owner_id", nullable = false)
-    private Long ownerId;
-
     @Column(name = "owner_name", nullable = false)
     private String ownerName;
 
     @Column(name = "service_type", nullable = false)
     private String serviceType;
+
+    @Column(name = "service_cost", nullable = false)
+    private Double serviceCost;
 
     // Getters and Setters
     public Long getServiceId() {
@@ -46,30 +40,6 @@ public class Service {
         this.vehicleNumber = vehicleNumber;
     }
 
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public String getModelNumber() {
-        return modelNumber;
-    }
-
-    public void setModelNumber(String modelNumber) {
-        this.modelNumber = modelNumber;
-    }
-
-    public Long getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(Long ownerId) {
-        this.ownerId = ownerId;
-    }
-
     public String getOwnerName() {
         return ownerName;
     }
@@ -85,5 +55,12 @@ public class Service {
     public void setServiceType(String serviceType) {
         this.serviceType = serviceType;
     }
-}
 
+    public Double getServiceCost() {
+        return serviceCost;
+    }
+
+    public void setServiceCost(Double serviceCost) {
+        this.serviceCost = serviceCost;
+    }
+}

@@ -9,18 +9,23 @@ public class Customers {
     @Column(name = "C_id")
     private Long id;
 
-    @Column(name = "C_name")
-    private String name;
+    @Column(name = "First Name", nullable = false)
+    private String firstname;
 
-    @Column(unique = true, nullable = false,name = "C_email")
-    private String email;
+    @Column(name = "Last Name", nullable = false)
+    private String lastname;
 
-    @Column(name = "C_address")
+    @Column(name = "Username", unique = true, nullable = false)
+    private String username;
+
+    @Column(name = "Address")
     private String address;
 
-@Column(name = "Registered Date")
-    private String date;
+    @Column(name = "Phone Number", unique = true, nullable = false)
+    private String phoneNumber;
 
+    @Column(name = "Email", unique = true, nullable = false)
+    private String email;
 
     // Getters and Setters
     public Long getId() {
@@ -31,12 +36,44 @@ public class Customers {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getEmail() {
@@ -46,21 +83,4 @@ public class Customers {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public String getAddress(){
-        return address;
-    }
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-
-    public String getDate(){
-        return date;
-    }
-    public void setDate(String date) {
-        this.date =date;
-    }
-
 }
-

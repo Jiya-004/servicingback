@@ -1,8 +1,6 @@
 package com.AJS.vehicleservice.service;
 
 import com.AJS.vehicleservice.model.Admin;
-import com.AJS.vehicleservice.model.Customers;
-
 import java.util.List;
 
 public interface AdminService {
@@ -11,5 +9,5 @@ public interface AdminService {
     List<Admin> getAllAdmins();
     Admin updateAdmin(Long id, Admin admin);
     void deleteAdmin(Long id);
-  Admin findByName(String name);
+    Admin findByName(String name);
 }

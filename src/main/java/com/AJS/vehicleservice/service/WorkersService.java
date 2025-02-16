@@ -4,9 +4,12 @@ import com.AJS.vehicleservice.model.Workers;
 import java.util.List;
 
 public interface WorkersService {
-    Workers registerMechanic(Workers mechanic);
-    List<Workers> findMechanicsByLocation(String location);
-    List<Workers> findMechanicsByExpertise(String expertise);
-    Workers getMechanicById(Long mechanicId);
-    void deleteMechanic(Long mechanicId);
+    Workers registerWorker(Workers worker);
+    List<Workers> findWorkersByExpertise(String expertise);
+    List<Workers> findWorkersByEmail(String email);
+    Workers getWorkerById(Long workerId);
+    void deleteWorker(Long workerId);
+    List<Workers> getAllWorkers();
+
+    Workers updateWorker(Long id, Workers updatedWorker);
 }

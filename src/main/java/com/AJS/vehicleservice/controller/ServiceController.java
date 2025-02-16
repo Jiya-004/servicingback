@@ -33,9 +33,9 @@ public class ServiceController {
         return ResponseEntity.ok(services);
     }
 
-    @GetMapping("/owner/{ownerId}")
-    public ResponseEntity<List<Service>> getServicesByOwnerId(@PathVariable Long ownerId) {
-        List<Service> services = serviceService.getServicesByOwnerId(ownerId);
+    @GetMapping("/owner/{ownerName}")
+    public ResponseEntity<List<Service>> getServicesByOwnerName(@PathVariable String ownerName) {
+        List<Service> services = serviceService.getServicesByOwnerName(ownerName);
         return ResponseEntity.ok(services);
     }
 
@@ -57,4 +57,3 @@ public class ServiceController {
         return ResponseEntity.noContent().build();
     }
 }
-
