@@ -3,7 +3,7 @@ package com.AJS.vehicleservice.model;
 import jakarta.persistence.*;
 
 @Entity
-public class Admin {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -14,7 +14,7 @@ public class Admin {
     private String email;
     private String phoneNumber;
     private String address;
-    private String name;
+    private String username;
     private String password;
     private String role;  // Added role field
 
@@ -66,12 +66,12 @@ public class Admin {
         this.address = address;
     }
 
-    public String getName(){
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword(){

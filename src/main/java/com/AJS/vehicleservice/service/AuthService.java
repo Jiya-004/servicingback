@@ -1,6 +1,8 @@
 package com.AJS.vehicleservice.service;
 
+import com.AJS.vehicleservice.dto.LoginResponseDto;
+
 public interface AuthService {
-    String login(String name, String password);
+    LoginResponseDto login(String username, String password, String role);
     boolean changePassword(String oldPassword, String newPassword);
 }

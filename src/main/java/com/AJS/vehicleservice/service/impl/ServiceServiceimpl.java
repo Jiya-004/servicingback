@@ -46,6 +46,7 @@ class ServiceServiceImpl implements ServiceService {
         existingService.setOwnerName(service.getOwnerName());
         existingService.setServiceType(service.getServiceType());
         existingService.setServiceCost(service.getServiceCost());
+        existingService.setUserId(service.getUserId());  // Set userId when updating
         return serviceRepository.save(existingService);
     }
 
@@ -53,5 +54,27 @@ class ServiceServiceImpl implements ServiceService {
     public void deleteService(Long serviceId) {
         Service service = getServiceById(serviceId);
         serviceRepository.delete(service);
+    }
+
+    @Override
+    public List<Service> getServicesByUserId(Long userId) {
+        return serviceRepository.findByUserId(userId);
+    }
+
+    @Override
+    public long getTotalServicesMade() {
+        return serviceRepository.count();
+    }
+
+    @Override
+    public Service approveService(Long serviceId) {
+        Service service = getServiceById(serviceId);
+        service.setStatus("Approved"); // Update status to Approved
+        return serviceRepository.save(service); // Save the updated service
+    }
+
+    @Override
+    public List<Service> getServicesByStatus(String status) {
+        return serviceRepository.findByStatus(status); // Query the repository for services by status
     }
 }

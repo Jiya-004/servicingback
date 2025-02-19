@@ -1,16 +1,21 @@
 package com.AJS.vehicleservice.controller;
 
 import com.AJS.vehicleservice.model.Workers;
+import com.AJS.vehicleservice.repository.WorkersRepository;
 import com.AJS.vehicleservice.service.WorkersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/workers")
 public class WorkersController {
-
+    @Autowired
+    private WorkersRepository workerRepository;
     @Autowired
     private WorkersService workersService;
 
@@ -46,5 +51,12 @@ public class WorkersController {
     @PutMapping("/{id}")
     public Workers updateWorker(@PathVariable Long id, @RequestBody Workers updatedWorker) {
         return workersService.updateWorker(id, updatedWorker);
+    }
+    @GetMapping("/total-workers")
+    public ResponseEntity<Map<String, Long>> getTotalWorkers() {
+        long count = workerRepository.count();  // Get total workers
+        Map<String, Long> response = new HashMap<>();
+        response.put("count", count);
+        return ResponseEntity.ok(response);
     }
 }

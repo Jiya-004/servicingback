@@ -23,6 +23,13 @@ public class Service {
     @Column(name = "service_cost", nullable = false)
     private Double serviceCost;
 
+    // Store the userId directly (without foreign key)
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
+
+    @Column(name = "status", nullable = false)
+    private String status; // New status field
+
     // Getters and Setters
     public Long getServiceId() {
         return serviceId;
@@ -62,5 +69,21 @@ public class Service {
 
     public void setServiceCost(Double serviceCost) {
         this.serviceCost = serviceCost;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getStatus() { // New getter for status
+        return status;
+    }
+
+    public void setStatus(String status) { // New setter for status
+        this.status = status;
     }
 }

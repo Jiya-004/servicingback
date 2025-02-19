@@ -43,4 +43,9 @@ public class ServicetypeServiceImpl implements ServicetypeService {
     public void deleteServicetype(Long id) {
         servicetypeRepository.deleteById(id);
     }
+
+    @Override
+    public long getTotalServiceTypes() {
+        return servicetypeRepository.count();
+    }
 }

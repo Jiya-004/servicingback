@@ -11,4 +11,6 @@ public interface ServicetypeService {
     Servicetype saveServicetype(Servicetype servicetype);
     Servicetype updateServicetype(Long id, Servicetype servicetype);
     void deleteServicetype(Long id);
+
+    long getTotalServiceTypes();
 }

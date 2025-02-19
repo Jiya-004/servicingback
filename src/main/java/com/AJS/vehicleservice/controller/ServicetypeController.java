@@ -1,19 +1,23 @@
 package com.AJS.vehicleservice.controller;
 
 import com.AJS.vehicleservice.model.Servicetype;
+import com.AJS.vehicleservice.repository.ServicetypeRepository;
 import com.AJS.vehicleservice.service.ServicetypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/servicetypes")
 public class ServicetypeController {
-
+    @Autowired
+    private ServicetypeRepository servicetypeRepository;
     @Autowired
     private ServicetypeService servicetypeService;  // Ensure the name matches
 
@@ -51,5 +55,12 @@ public class ServicetypeController {
     public ResponseEntity<Void> deleteServiceType(@PathVariable Long id) {
         servicetypeService.deleteServicetype(id);  // Ensure the name matches
         return ResponseEntity.noContent().build();
+    }
+    @GetMapping("/total-service-types")
+    public ResponseEntity<Map<String, Long>> getTotalServiceTypes() {
+        long count = servicetypeRepository.count();  // Get total service types
+        Map<String, Long> response = new HashMap<>();
+        response.put("count", count);
+        return ResponseEntity.ok(response);
     }
 }

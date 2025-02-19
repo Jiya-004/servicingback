@@ -1,7 +1,7 @@
 package com.AJS.vehicleservice.config;
 
-import com.AJS.vehicleservice.model.Admin;
-import com.AJS.vehicleservice.service.AdminService;
+import com.AJS.vehicleservice.model.User;
+import com.AJS.vehicleservice.service.UserService;
 import com.AJS.vehicleservice.util.JwtUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -21,7 +21,7 @@ import java.util.Collections;
 public class AuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired
-    private AdminService adminService;  // Admin service to access the admin database
+    private UserService adminService;  // User service to access the admin database
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -41,23 +41,23 @@ public class AuthenticationFilter extends OncePerRequestFilter {
         if (username != null) {
             // Validate the token
             if (JwtUtil.validateToken(jwtToken, username)) {
-                // Fetch admin details from the database
-                Admin admin = adminService.findByName(username);
+                // Fetch user details from the database
+                User user = adminService.findByUsername(username);
 
-                // Check if the admin exists in the database
-                if (admin != null) {
-                    // If the admin exists, authenticate the request
+                // Check if the user exists in the database
+                if (user != null) {
+                    // If the user exists, authenticate the request
                     UsernamePasswordAuthenticationToken authenticationToken =
                             new UsernamePasswordAuthenticationToken(
                                     username,  // Username (principal)
                                     null,      // Password (credentials, null in JWT context)
-                                    Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN"))  // Default "admin" authority
+                                    Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN"))  // Default "user" authority
                             );
                     // Set the authentication in SecurityContext
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
                 } else {
-                    // If admin not found in the database, respond with unauthorized
-                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid admin credentials");
+                    // If user not found in the database, respond with unauthorized
+                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid user credentials");
                     return;
                 }
             } else {

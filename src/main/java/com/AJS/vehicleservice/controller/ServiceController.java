@@ -1,22 +1,28 @@
 package com.AJS.vehicleservice.controller;
 
 import com.AJS.vehicleservice.model.Service;
+import com.AJS.vehicleservice.repository.ServiceRepository;
 import com.AJS.vehicleservice.service.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/services")
 public class ServiceController {
 
     @Autowired
+    private ServiceRepository serviceRepository;
+    @Autowired
     private ServiceService serviceService;
 
     @PostMapping
     public ResponseEntity<Service> addService(@RequestBody Service service) {
+        service.setStatus("Pending"); // Set default status to Pending
         Service createdService = serviceService.addService(service);
         return ResponseEntity.ok(createdService);
     }
@@ -39,9 +45,21 @@ public class ServiceController {
         return ResponseEntity.ok(services);
     }
 
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<Service>> getServicesByUserId(@PathVariable Long userId) {
+        List<Service> services = serviceService.getServicesByUserId(userId);
+        return ResponseEntity.ok(services);
+    }
+
     @GetMapping
     public ResponseEntity<List<Service>> getAllServices() {
         List<Service> services = serviceService.getAllServices();
+        return ResponseEntity.ok(services);
+    }
+
+    @GetMapping("/status/{status}") // New endpoint to get services by status
+    public ResponseEntity<List<Service>> getServicesByStatus(@PathVariable String status) {
+        List<Service> services = serviceService.getServicesByStatus(status);
         return ResponseEntity.ok(services);
     }
 
@@ -55,5 +73,19 @@ public class ServiceController {
     public ResponseEntity<Void> deleteService(@PathVariable Long id) {
         serviceService.deleteService(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/approve/{id}") // Endpoint to approve service
+    public ResponseEntity<Service> approveService(@PathVariable Long id) {
+        Service approvedService = serviceService.approveService(id);
+        return ResponseEntity.ok(approvedService);
+    }
+
+    @GetMapping("/total-services-made")
+    public ResponseEntity<Map<String, Long>> getTotalServicesMade() {
+        long count = serviceRepository.count();  // Get total services made
+        Map<String, Long> response = new HashMap<>();
+        response.put("count", count);
+        return ResponseEntity.ok(response);
     }
 }
