@@ -9,13 +9,28 @@ public class User {
     @Column(name = "id")
     private Long id;
 
+    @Column(nullable = false)
     private String firstName;
+
+    @Column(nullable = false)
     private String lastName;
+
+    @Column(nullable = false, unique = true)
     private String email;
+
+    @Column(nullable = false, unique = true)
     private String phoneNumber;
+
+    @Column(nullable = false)
     private String address;
+
+    @Column(nullable = false, unique = true)
     private String username;
+
+    @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
     private String role;  // Added role field
 
     public Long getId() {
